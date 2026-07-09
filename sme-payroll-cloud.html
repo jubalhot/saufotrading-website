@@ -518,6 +518,44 @@
       color: var(--muted);
       font-size: 13px;
     }
+    .auth-mode-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 8px;
+      background: #eef5f3;
+      border: 1px solid var(--line);
+    }
+    .auth-mode-row button {
+      border-radius: 7px;
+      background: transparent;
+      color: #284145;
+      font-weight: 900;
+    }
+    .auth-mode-row button.active {
+      background: var(--brand);
+      color: #fff;
+    }
+    .auth-help {
+      border: 1px solid #cfe0dc;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f4fbf8;
+      color: #243538;
+      display: grid;
+      gap: 7px;
+    }
+    .auth-help strong {
+      font-size: 16px;
+    }
+    .auth-help ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .subscription-banner {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -609,7 +647,7 @@
     }
     .business-bar {
       display: grid;
-      grid-template-columns: 1fr 1fr auto auto;
+      grid-template-columns: 1fr 1fr auto auto auto;
       gap: 8px;
       align-items: end;
       background: var(--panel);
@@ -633,6 +671,29 @@
     .status-pill.pending {
       background: #fff2dc;
       color: #a15d00;
+    }
+    .account-panel {
+      display: grid;
+      gap: 12px;
+    }
+    .account-plan-card {
+      display: grid;
+      gap: 8px;
+      border: 1px solid #cfe0dc;
+      background: #f7fbf9;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .account-plan-card .actions {
+      justify-content: flex-start;
+    }
+    .invite-box {
+      border: 1px dashed #b8ceca;
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      background: #fff;
     }
     .export-grid {
       display: grid;
@@ -739,10 +800,22 @@
       <img src="assets/saufo-logo.png" alt="SME Payroll icon" onerror="this.onerror=null;this.src='assets/saufo-logo-hd.png';">
       <div>
         <h1>SME Payroll</h1>
-        <p class="subtitle">Sign in or create an account to manage payrolls for multiple businesses.</p>
+        <p class="subtitle" id="authIntro">Welcome back. Sign in to continue with your saved business payroll file.</p>
+      </div>
+      <div class="auth-mode-row" aria-label="Account mode">
+        <button type="button" id="showSignInBtn" class="active">Sign in</button>
+        <button type="button" id="showSignUpBtn">Create account</button>
+      </div>
+      <div class="auth-help" id="authHelp">
+        <strong>Simple payroll workflow for everyday business users</strong>
+        <ul>
+          <li>Returning users only enter email and password, then go straight to the payroll home page.</li>
+          <li>Your business profile, staff, PPE dates, timesheets, payslips and reports stay under the same account.</li>
+          <li>Start single-user, then upgrade to multi-user later without clearing your payroll records.</li>
+        </ul>
       </div>
       <div class="auth-form-grid">
-        <div>
+        <div class="signup-only">
           <label for="authName">Name</label>
           <input id="authName" type="text" placeholder="Your name">
         </div>
@@ -754,24 +827,24 @@
           <label for="authPassword">Password</label>
           <input id="authPassword" type="password" placeholder="Password">
         </div>
-        <div>
+        <div class="signup-only">
           <label for="signupBusinessName">Business name</label>
           <input id="signupBusinessName" type="text" placeholder="Registered business name">
         </div>
-        <div>
+        <div class="signup-only">
           <label for="signupBusinessPhone">Business phone</label>
           <input id="signupBusinessPhone" type="tel" placeholder="Business phone">
         </div>
-        <div>
+        <div class="signup-only">
           <label for="signupBusinessEmail">Business email</label>
           <input id="signupBusinessEmail" type="email" placeholder="Business email">
         </div>
-        <div class="full">
+        <div class="full signup-only">
           <label for="signupBusinessAddress">Business address</label>
           <input id="signupBusinessAddress" type="text" placeholder="Business address">
         </div>
       </div>
-      <div>
+      <div class="signup-only">
         <label>Subscription plan after free trial</label>
         <div class="plan-grid">
           <label class="plan-option">
@@ -801,8 +874,8 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn" id="signUpBtn">Sign up</button>
-        <button class="btn secondary" id="signInBtn">Sign in</button>
+        <button class="btn hidden" id="signUpBtn">Create account and start 30-day trial</button>
+        <button class="btn" id="signInBtn">Sign in and open payroll</button>
       </div>
       <p class="subtitle">New users receive 30 days free. After the trial, payment is required through PayPal using Visa Debit/Card or PayPal balance.</p>
       <p class="subtitle">After sign-up or sign-in, SME Payroll opens to the home page so you can manage staff, timesheets, payroll, payslips and reports.</p>
@@ -929,6 +1002,7 @@
         <select id="payrollSelect"></select>
       </div>
       <button class="btn secondary" id="addBusinessBtn">Add business</button>
+      <button class="btn secondary" id="upgradeMultiBtn">Upgrade multi-user</button>
       <button class="btn secondary" id="signOutBtn">Sign out</button>
     </section>
 
@@ -1084,6 +1158,41 @@
           <button class="btn" id="saveSettingsBtn">Save settings</button>
         </div>
       </div>
+      <div class="panel account-panel" style="margin-bottom:12px;">
+        <div class="account-plan-card">
+          <div>
+            <span id="accountPlanBadge" class="status-pill">Single user</span>
+            <h3 style="margin-top:8px;">Account access</h3>
+            <p class="subtitle" id="accountPlanText">Manage subscription and shared access for this business payroll file.</p>
+          </div>
+          <div class="actions">
+            <button class="btn" id="settingsUpgradeMultiBtn">Upgrade to multi-user</button>
+            <button class="btn secondary" id="settingsManageSubscriptionBtn">Manage subscription</button>
+          </div>
+        </div>
+        <div class="invite-box hidden" id="multiUserInviteBox">
+          <h3>Invite another user</h3>
+          <p class="subtitle">After multi-user payment is active, send this business access link to another worker or approver. In this browser version, the invitation records the email and shows the shared business name.</p>
+          <div class="auth-form-grid">
+            <div>
+              <label for="inviteEmailInput">User email</label>
+              <input id="inviteEmailInput" type="email" placeholder="worker@example.com">
+            </div>
+            <div>
+              <label for="inviteRoleSelect">Role</label>
+              <select id="inviteRoleSelect">
+                <option value="viewer">Viewer / approver</option>
+                <option value="payroll">Payroll officer</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn" id="saveInviteBtn">Save invitation</button>
+          </div>
+          <div id="inviteList" class="subtitle"></div>
+        </div>
+      </div>
       <div class="panel settings-grid">
         <div>
           <img id="companyLogoPreview" class="logo-preview" src="assets/saufo-logo.png" alt="Company logo preview" onerror="this.onerror=null;this.src='assets/saufo-logo-hd.png';">
@@ -1176,6 +1285,7 @@
     let selectedId = data.staff[0]?.id || "";
     let activeTab = "time";
     let printMode = null;
+    let authMode = auth.currentEmail || auth.users.length ? "signin" : "signup";
 
     const $ = (id) => document.getElementById(id);
     const money = (n) => `K${Number(n || 0).toFixed(2)}`;
@@ -1192,6 +1302,33 @@
 
     function selectedPlan() {
       return document.querySelector("input[name='signupPlan']:checked")?.value || "single_monthly";
+    }
+    function planIsMulti(plan) {
+      return plan === "multi_monthly" || plan === "multi_yearly";
+    }
+    function currentPlan(user = currentUser()) {
+      return user?.subscription?.plan || user?.plan || "single_monthly";
+    }
+    function setAuthMode(mode) {
+      authMode = mode;
+      const isSignup = mode === "signup";
+      document.querySelectorAll(".signup-only").forEach(el => el.classList.toggle("hidden", !isSignup));
+      $("signUpBtn").classList.toggle("hidden", !isSignup);
+      $("signInBtn").classList.toggle("hidden", isSignup);
+      $("showSignInBtn").classList.toggle("active", !isSignup);
+      $("showSignUpBtn").classList.toggle("active", isSignup);
+      $("authIntro").textContent = isSignup
+        ? "Create your owner account once, then SME Payroll will remember this business setup on this browser."
+        : "Welcome back. Sign in to continue with your saved business payroll file.";
+      if (!isSignup && auth.users.length && !$("authEmail").value) $("authEmail").value = auth.users[auth.users.length - 1].email || "";
+    }
+    function showSignIn() {
+      setAuthMode("signin");
+      $("authPassword").focus();
+    }
+    function showSignUp() {
+      setAuthMode("signup");
+      $("authName").focus();
     }
     function trialEndsAt(user) {
       const started = new Date(user?.trialStart || Date.now()).getTime();
@@ -1281,7 +1418,7 @@
       $("multiMonthlyPayLink").href = `${paymentLinks.multi_monthly}&custom=${businessName}`;
       $("multiYearlyPayLink").href = `${paymentLinks.multi_yearly}&custom=${businessName}`;
       $("paymentStatusText").textContent = user
-        ? subscriptionReminderMessage(user) || `Your 30-day free trial for ${user.business?.name || "your business"} has ended. Pay with PayPal or Visa Debit/Card to continue.`
+        ? subscriptionReminderMessage(user) || `Selected plan: ${planLabel(currentPlan(user))}. Pay with PayPal or Visa Debit/Card to continue. Your existing payroll files will remain under this business account.`
         : "Choose a plan to continue using SME Payroll.";
       $("authView").classList.add("hidden");
       $("paymentView").classList.remove("hidden");
@@ -1334,7 +1471,8 @@
     }
     function currentAccount() {
       if (!auth.currentEmail) return null;
-      appState.accounts[auth.currentEmail] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
+      appState.accounts[auth.currentEmail] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
+      appState.accounts[auth.currentEmail].invitations ||= [];
       return appState.accounts[auth.currentEmail];
     }
     function idFrom(prefix) {
@@ -1580,6 +1718,20 @@
     }
     function renderSettings() {
       const p = profile();
+      const user = currentUser();
+      const account = currentAccount();
+      const plan = currentPlan(user);
+      const multi = planIsMulti(plan);
+      $("accountPlanBadge").textContent = multi ? "Multi-user access" : "Single-user access";
+      $("accountPlanBadge").classList.toggle("pending", !multi);
+      $("accountPlanText").textContent = multi
+        ? `${planLabel(plan)} is selected. You can invite workers or approvers to the same business payroll file.`
+        : `${planLabel(plan)} is selected. Upgrade to multi-user when other workers or approvers need shared access. Existing payroll records will remain unchanged.`;
+      $("multiUserInviteBox").classList.toggle("hidden", !multi);
+      $("settingsUpgradeMultiBtn").classList.toggle("hidden", multi);
+      $("inviteList").innerHTML = (account?.invitations || []).length
+        ? `<strong>Saved invitations:</strong> ${account.invitations.map(inv => `${inv.email} (${inv.role})`).join(", ")}`
+        : "No invitations saved yet.";
       $("userNameInput").value = p.userName || "";
       $("companyNameInput").value = p.companyName || "";
       $("companyAddressInput").value = p.address || "";
@@ -1968,9 +2120,50 @@
       saveAppState();
       render();
     }
+    function chooseUpgradePlan(plan = "multi_monthly") {
+      const user = currentUser();
+      if (!user) return;
+      user.plan = plan;
+      user.subscription = {
+        ...(user.subscription || {}),
+        status: user.subscription?.status === "paid" && planIsMulti(user.subscription?.plan) ? "paid" : "pending_upgrade",
+        plan,
+        amountUsd: planAmount(plan)
+      };
+      saveAuth();
+      showPayment(user);
+    }
+    function saveInvitation() {
+      const account = currentAccount();
+      const business = activeBusiness();
+      const user = currentUser();
+      if (!planIsMulti(currentPlan(user))) {
+        alert("Upgrade this account to multi-user before inviting other users.");
+        return;
+      }
+      const email = $("inviteEmailInput").value.trim().toLowerCase();
+      const role = $("inviteRoleSelect").value;
+      if (!email) return alert("Enter the user's email address.");
+      account.invitations ||= [];
+      if (!account.invitations.some(inv => inv.email === email)) {
+        account.invitations.push({
+          email,
+          role,
+          businessId: business?.id || "",
+          businessName: business?.name || companyName(),
+          invitedAt: new Date().toISOString()
+        });
+      }
+      $("inviteEmailInput").value = "";
+      saveAppState();
+      renderSettings();
+      alert(`Invitation saved for ${email}. For full cross-device sharing, this invitation must be connected to the Cloudflare D1 backend.`);
+    }
 
     document.querySelectorAll("[data-tab]").forEach(btn => btn.onclick = () => setTab(btn.dataset.tab));
     document.querySelectorAll("[data-home-tab]").forEach(btn => btn.onclick = () => setTab(btn.dataset.homeTab));
+    $("showSignInBtn").onclick = showSignIn;
+    $("showSignUpBtn").onclick = showSignUp;
     $("signUpBtn").onclick = () => {
       const name = $("authName").value.trim();
       const email = $("authEmail").value.trim().toLowerCase();
@@ -2005,7 +2198,7 @@
       });
       auth.currentEmail = email;
       saveAuth();
-      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
+      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
       const account = appState.accounts[email];
       if (!account.businesses.length) {
         const business = makeBusiness(businessName);
@@ -2032,7 +2225,7 @@
       if (!user) return alert("Sign-in failed. Check your email and password.");
       auth.currentEmail = email;
       saveAuth();
-      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
+      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
       activeBusiness();
       data = loadActivePayroll();
       selectedId = data.staff[0]?.id || "";
@@ -2040,6 +2233,10 @@
       render();
     };
     $("manageSubscriptionBtn").onclick = () => showPayment();
+    $("upgradeMultiBtn").onclick = () => chooseUpgradePlan("multi_monthly");
+    $("settingsUpgradeMultiBtn").onclick = () => chooseUpgradePlan("multi_monthly");
+    $("settingsManageSubscriptionBtn").onclick = () => showPayment();
+    $("saveInviteBtn").onclick = saveInvitation;
     async function enableSubscriptionNotifications() {
       if (!("Notification" in window)) {
         alert("This browser does not support notification reminders. SME Payroll will still show reminders inside the app.");
@@ -2233,6 +2430,7 @@
       save();
     };
 
+    setAuthMode(authMode);
     render();
   </script>
 </body>
