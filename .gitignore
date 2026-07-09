@@ -1,0 +1,14 @@
+# Local system files
+.DS_Store
+Thumbs.db
+
+# Local editor/project files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Deployment archives should not be committed
+*.zip
