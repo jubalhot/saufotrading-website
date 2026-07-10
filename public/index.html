@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SME Payroll Cloud</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Cloud-backed SME Payroll</p>
+          <h1>Shared payroll for one business, multiple users.</h1>
+          <p>Use Cloudflare Workers and D1 to let owners, admins, payroll officers and viewers access the same business payroll setup with role permissions.</p>
+        </div>
+        <div class="status" id="sessionStatus">Signed out</div>
+      </section>
+
+      <section class="grid two">
+        <form class="card" id="signupForm">
+          <h2>Create owner account</h2>
+          <label>Name <input name="name" required></label>
+          <label>Email <input name="email" type="email" required></label>
+          <label>Password <input name="password" type="password" minlength="8" required></label>
+          <label>Business name <input name="businessName" required></label>
+          <label>Business phone <input name="businessPhone"></label>
+          <label>Business email <input name="businessEmail" type="email"></label>
+          <label>Business address <input name="businessAddress"></label>
+          <label>Plan
+            <select name="plan">
+              <option value="single_monthly">Single user - $10 monthly</option>
+              <option value="single_yearly">Single user - $100 yearly</option>
+              <option value="multi_monthly">Multiple users - $20 monthly</option>
+              <option value="multi_yearly">Multiple users - $200 yearly</option>
+            </select>
+          </label>
+          <button>Create account and 30-day trial</button>
+        </form>
+
+        <form class="card" id="signinForm">
+          <h2>Sign in</h2>
+          <label>Email <input name="email" type="email" required></label>
+          <label>Password <input name="password" type="password" required></label>
+          <button>Sign in</button>
+          <button type="button" class="secondary" id="signOutBtn">Sign out</button>
+        </form>
+      </section>
+
+      <section class="card hidden" id="workspace">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Business workspace</p>
+            <h2 id="businessName">No business selected</h2>
+            <p id="businessMeta"></p>
+          </div>
+          <select id="businessSelect" aria-label="Select business"></select>
+        </div>
+
+        <nav class="tabs">
+          <button data-tab="calendar" class="active">Calendar</button>
+          <button data-tab="staff">Staff</button>
+          <button data-tab="time">Timesheets</button>
+          <button data-tab="invites">Users</button>
+        </nav>
+
+        <section id="calendarTab">
+          <div class="grid two">
+            <form class="panel" id="payrollForm">
+              <h3>Create payroll period</h3>
+              <label>Payroll label <input name="label" placeholder="Pay 13" required></label>
+              <label>Start date <input name="startDate" type="date" required></label>
+              <label>PPE date <input name="ppeDate" type="date" required></label>
+              <button>Create PPE period</button>
+            </form>
+            <div class="panel">
+              <h3>PPE calendar</h3>
+              <div id="payrollPeriods" class="list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="staffTab" class="hidden">
+          <div class="grid two">
+            <form class="panel" id="staffForm">
+              <h3>Add staff</h3>
+              <label>Name <input name="name" required></label>
+              <label>Employee no. <input name="employeeNo"></label>
+              <label>Position <input name="position"></label>
+              <label>Department <input name="department"></label>
+              <label>Hourly rate <input name="hourlyRate" type="number" step="0.01"></label>
+              <button>Add staff</button>
+            </form>
+            <div class="panel">
+              <h3>Staff list</h3>
+              <div id="staffList" class="list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="timeTab" class="hidden">
+          <div class="panel">
+            <h3>Enter staff time</h3>
+            <div class="grid two">
+              <label>Payroll period <select id="timePeriodSelect"></select></label>
+              <label>Staff <select id="timeStaffSelect"></select></label>
+              <label>Work date <input id="timeDate" type="date"></label>
+              <label>Hours <input id="timeHours" type="number" step="0.5"></label>
+            </div>
+            <button id="saveTimeBtn">Save time entry</button>
+            <button class="secondary" id="generatePayslipsBtn">Generate payslips</button>
+            <div id="timeEntries" class="list"></div>
+          </div>
+        </section>
+
+        <section id="invitesTab" class="hidden">
+          <div class="grid two">
+            <form class="panel" id="inviteForm">
+              <h3>Invite user</h3>
+              <label>Email <input name="email" type="email" required></label>
+              <label>Role
+                <select name="role">
+                  <option value="payroll_officer">Payroll officer</option>
+                  <option value="viewer">Viewer</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </label>
+              <button>Create invite link</button>
+              <p class="small" id="inviteResult"></p>
+            </form>
+            <form class="panel" id="acceptInviteForm">
+              <h3>Accept invite</h3>
+              <label>Invite token <input name="token" required></label>
+              <button>Accept invitation</button>
+              <div id="inviteList" class="list"></div>
+            </form>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "sme-payroll-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 execute sme_payroll --local --file=schema.sql",
+    "db:remote": "wrangler d1 execute sme_payroll --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

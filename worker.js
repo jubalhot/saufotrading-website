@@ -468,7 +468,7 @@ function json(data, status = 200, env = {}) {
 }
 
 function withCors(response, env) {
-  response.headers.set("access-control-allow-origin", origin(env));
+  response.headers.set("access-control-allow-origin", "*");
   response.headers.set("access-control-allow-methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
   response.headers.set("access-control-allow-headers", "content-type,authorization");
   return response;
