@@ -1,12 +1,6 @@
-name = "sme-payroll-api"
-main = "worker.js"
-compatibility_date = "2026-07-08"
+name = "saufotrading-website"
+compatibility_date = "2026-07-11"
 
-[[d1_databases]]
-binding = "DB"
-database_name = "sme_payroll"
-database_id = "2684987d-d1fe-47bb-a230-e15e17d46514"
-
-[vars]
-APP_ORIGIN = "https://www.saufotrading.com"
-SESSION_DAYS = "30"
+[assets]
+directory = "."
+not_found_handling = "404-page"
