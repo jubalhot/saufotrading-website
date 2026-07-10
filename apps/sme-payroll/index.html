@@ -518,44 +518,6 @@
       color: var(--muted);
       font-size: 13px;
     }
-    .auth-mode-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 6px;
-      border-radius: 8px;
-      background: #eef5f3;
-      border: 1px solid var(--line);
-    }
-    .auth-mode-row button {
-      border-radius: 7px;
-      background: transparent;
-      color: #284145;
-      font-weight: 900;
-    }
-    .auth-mode-row button.active {
-      background: var(--brand);
-      color: #fff;
-    }
-    .auth-help {
-      border: 1px solid #cfe0dc;
-      border-radius: 8px;
-      padding: 12px;
-      background: #f4fbf8;
-      color: #243538;
-      display: grid;
-      gap: 7px;
-    }
-    .auth-help strong {
-      font-size: 16px;
-    }
-    .auth-help ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
     .subscription-banner {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -576,25 +538,6 @@
       flex-wrap: wrap;
       gap: 8px;
       justify-content: end;
-    }
-    .cloud-sync-panel {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
-      margin: 0 0 12px;
-      padding: 12px;
-      border: 1px solid #cfe0dc;
-      border-radius: 8px;
-      background: #f7fbf9;
-    }
-    .cloud-sync-panel strong {
-      display: block;
-      margin-bottom: 3px;
-    }
-    .cloud-sync-panel.warn {
-      border-color: #f0c987;
-      background: #fff8ea;
     }
     .payment-screen {
       min-height: 100vh;
@@ -666,7 +609,7 @@
     }
     .business-bar {
       display: grid;
-      grid-template-columns: 1fr 1fr auto auto auto;
+      grid-template-columns: 1fr 1fr auto auto;
       gap: 8px;
       align-items: end;
       background: var(--panel);
@@ -690,29 +633,6 @@
     .status-pill.pending {
       background: #fff2dc;
       color: #a15d00;
-    }
-    .account-panel {
-      display: grid;
-      gap: 12px;
-    }
-    .account-plan-card {
-      display: grid;
-      gap: 8px;
-      border: 1px solid #cfe0dc;
-      background: #f7fbf9;
-      border-radius: 8px;
-      padding: 12px;
-    }
-    .account-plan-card .actions {
-      justify-content: flex-start;
-    }
-    .invite-box {
-      border: 1px dashed #b8ceca;
-      border-radius: 8px;
-      padding: 12px;
-      display: grid;
-      gap: 8px;
-      background: #fff;
     }
     .export-grid {
       display: grid;
@@ -816,25 +736,13 @@
 <body>
   <section id="authView" class="auth-screen">
     <div class="auth-card">
-      <img src="/assets/saufo-logo.png" alt="SME Payroll icon" onerror="this.onerror=null;this.src='/assets/saufo-logo-hd.png';">
+      <img src="assets/saufo-logo.png" alt="SME Payroll icon" onerror="this.onerror=null;this.src='assets/saufo-logo-hd.png';">
       <div>
         <h1>SME Payroll</h1>
-        <p class="subtitle" id="authIntro">Welcome back. Sign in to continue with your saved business payroll file.</p>
-      </div>
-      <div class="auth-mode-row" aria-label="Account mode">
-        <button type="button" id="showSignInBtn" class="active">Sign in</button>
-        <button type="button" id="showSignUpBtn">Create account</button>
-      </div>
-      <div class="auth-help" id="authHelp">
-        <strong>Simple payroll workflow for everyday business users</strong>
-        <ul>
-          <li>Returning users only enter email and password, then go straight to the payroll home page.</li>
-          <li>Your business profile, staff, PPE dates, timesheets, payslips and reports stay under the same account.</li>
-          <li>Start single-user, then upgrade to multi-user later without clearing your payroll records.</li>
-        </ul>
+        <p class="subtitle">Sign in or create an account to manage payrolls for multiple businesses.</p>
       </div>
       <div class="auth-form-grid">
-        <div class="signup-only">
+        <div>
           <label for="authName">Name</label>
           <input id="authName" type="text" placeholder="Your name">
         </div>
@@ -846,24 +754,24 @@
           <label for="authPassword">Password</label>
           <input id="authPassword" type="password" placeholder="Password">
         </div>
-        <div class="signup-only">
+        <div>
           <label for="signupBusinessName">Business name</label>
           <input id="signupBusinessName" type="text" placeholder="Registered business name">
         </div>
-        <div class="signup-only">
+        <div>
           <label for="signupBusinessPhone">Business phone</label>
           <input id="signupBusinessPhone" type="tel" placeholder="Business phone">
         </div>
-        <div class="signup-only">
+        <div>
           <label for="signupBusinessEmail">Business email</label>
           <input id="signupBusinessEmail" type="email" placeholder="Business email">
         </div>
-        <div class="full signup-only">
+        <div class="full">
           <label for="signupBusinessAddress">Business address</label>
           <input id="signupBusinessAddress" type="text" placeholder="Business address">
         </div>
       </div>
-      <div class="signup-only">
+      <div>
         <label>Subscription plan after free trial</label>
         <div class="plan-grid">
           <label class="plan-option">
@@ -893,8 +801,8 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn hidden" id="signUpBtn">Create account and start 30-day trial</button>
-        <button class="btn" id="signInBtn">Sign in and open payroll</button>
+        <button class="btn" id="signUpBtn">Sign up</button>
+        <button class="btn secondary" id="signInBtn">Sign in</button>
       </div>
       <p class="subtitle">New users receive 30 days free. After the trial, payment is required through PayPal using Visa Debit/Card or PayPal balance.</p>
       <p class="subtitle">After sign-up or sign-in, SME Payroll opens to the home page so you can manage staff, timesheets, payroll, payslips and reports.</p>
@@ -953,16 +861,6 @@
         <button class="btn secondary" id="manageSubscriptionBtn">Manage subscription</button>
       </div>
     </section>
-    <section id="cloudSyncPanel" class="cloud-sync-panel hidden">
-      <div>
-        <strong id="cloudSyncTitle">Cloud sync</strong>
-        <p class="subtitle" id="cloudSyncText">Sign in to sync this payroll file across devices.</p>
-      </div>
-      <div class="subscription-actions">
-        <button class="btn secondary" id="uploadCloudBtn">Upload this device</button>
-        <button class="btn secondary" id="downloadCloudBtn">Load cloud file</button>
-      </div>
-    </section>
     <section id="homeView" class="home-page" aria-label="SME Payroll home">
       <div class="home-hero">
         <div>
@@ -970,7 +868,7 @@
           <h1>SME Payroll</h1>
           <p class="subtitle">Start from the home page, then move through staff setup, PPE calendar, staff time, timesheets, payslips, payroll processing and reports.</p>
         </div>
-        <img class="home-logo" src="/assets/saufo-logo.png" alt="SAUFO Trading logo" onerror="this.onerror=null;this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;logo-fallback&quot;>SAUFO</span>');">
+        <img class="home-logo" src="assets/saufo-logo.png" alt="SAUFO Trading logo" onerror="this.onerror=null;this.style.display='none';this.insertAdjacentHTML('afterend','<span class=&quot;logo-fallback&quot;>SAUFO</span>');">
       </div>
       <div class="home-actions">
         <button class="home-action" data-home-tab="time" type="button">
@@ -1031,7 +929,6 @@
         <select id="payrollSelect"></select>
       </div>
       <button class="btn secondary" id="addBusinessBtn">Add business</button>
-      <button class="btn secondary" id="upgradeMultiBtn">Upgrade multi-user</button>
       <button class="btn secondary" id="signOutBtn">Sign out</button>
     </section>
 
@@ -1187,44 +1084,9 @@
           <button class="btn" id="saveSettingsBtn">Save settings</button>
         </div>
       </div>
-      <div class="panel account-panel" style="margin-bottom:12px;">
-        <div class="account-plan-card">
-          <div>
-            <span id="accountPlanBadge" class="status-pill">Single user</span>
-            <h3 style="margin-top:8px;">Account access</h3>
-            <p class="subtitle" id="accountPlanText">Manage subscription and shared access for this business payroll file.</p>
-          </div>
-          <div class="actions">
-            <button class="btn" id="settingsUpgradeMultiBtn">Upgrade to multi-user</button>
-            <button class="btn secondary" id="settingsManageSubscriptionBtn">Manage subscription</button>
-          </div>
-        </div>
-        <div class="invite-box hidden" id="multiUserInviteBox">
-          <h3>Invite another user</h3>
-          <p class="subtitle">After multi-user payment is active, send this business access link to another worker or approver. In this browser version, the invitation records the email and shows the shared business name.</p>
-          <div class="auth-form-grid">
-            <div>
-              <label for="inviteEmailInput">User email</label>
-              <input id="inviteEmailInput" type="email" placeholder="worker@example.com">
-            </div>
-            <div>
-              <label for="inviteRoleSelect">Role</label>
-              <select id="inviteRoleSelect">
-                <option value="viewer">Viewer / approver</option>
-                <option value="payroll">Payroll officer</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-          </div>
-          <div class="actions">
-            <button class="btn" id="saveInviteBtn">Save invitation</button>
-          </div>
-          <div id="inviteList" class="subtitle"></div>
-        </div>
-      </div>
       <div class="panel settings-grid">
         <div>
-          <img id="companyLogoPreview" class="logo-preview" src="/assets/saufo-logo.png" alt="Company logo preview" onerror="this.onerror=null;this.src='/assets/saufo-logo-hd.png';">
+          <img id="companyLogoPreview" class="logo-preview" src="assets/saufo-logo.png" alt="Company logo preview" onerror="this.onerror=null;this.src='assets/saufo-logo-hd.png';">
           <p class="subtitle" style="margin-top:10px;">This logo appears on timesheets and payslips.</p>
         </div>
         <div class="settings-form">
@@ -1290,8 +1152,8 @@
         accountName: "",
         accountNumber: "",
         branch: "",
-        logo: "/assets/saufo-logo.png",
-        appIcon: "/assets/saufo-logo.png"
+        logo: "assets/saufo-logo.png",
+        appIcon: "assets/saufo-logo.png"
       },
       period: "",
       dates: [],
@@ -1301,12 +1163,6 @@
     const storeKey = "sme-payroll-blank-v1";
     const authKey = "sme-payroll-users-v1";
     const multiKey = "sme-payroll-multi-business-v1";
-    const cloudTokenKey = "sme-payroll-cloud-token-v1";
-    const apiOriginOverride = localStorage.getItem("sme-payroll-api-origin");
-    const apiOrigins = apiOriginOverride
-      ? [apiOriginOverride]
-      : ["https://sme-payroll-api.t-vevera.workers.dev", "https://www.saufotrading.com", location.origin]
-        .filter((origin, index, list) => origin && list.indexOf(origin) === index);
     const trialDays = 30;
     const paymentLinks = {
       single_monthly: "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick-subscriptions&business=t.vevera%40gmail.com&item_name=SME%20Payroll%20Single%20User%20Monthly&currency_code=USD&a3=10.00&p3=1&t3=M&src=1",
@@ -1320,13 +1176,6 @@
     let selectedId = data.staff[0]?.id || "";
     let activeTab = "time";
     let printMode = null;
-    let authMode = auth.currentEmail || auth.users.length ? "signin" : "signup";
-    let cloudToken = localStorage.getItem(cloudTokenKey) || "";
-    let cloudSaveTimer = null;
-    let cloudSyncBusy = false;
-    let cloudSyncMessage = "";
-    let cloudSyncWarning = false;
-    let lastCloudSyncSuccess = localStorage.getItem("sme-payroll-last-cloud-sync-v1") || "";
 
     const $ = (id) => document.getElementById(id);
     const money = (n) => `K${Number(n || 0).toFixed(2)}`;
@@ -1335,198 +1184,14 @@
     const profile = () => data.profile || seed.profile;
     const companyName = () => profile().companyName || data.company || "Company";
     const companyAddress = () => profile().address || (data.address || []).join(", ");
-    const companyLogo = () => profile().logo || profile().appIcon || "/assets/saufo-logo.png";
-    const appIcon = () => profile().appIcon || "/assets/saufo-logo.png";
+    const companyLogo = () => profile().logo || profile().appIcon || "assets/saufo-logo.png";
+    const appIcon = () => profile().appIcon || "assets/saufo-logo.png";
     const contactLine = () => [profile().phone, profile().email].filter(Boolean).join(" | ");
     const currentUser = () => auth.users.find(u => u.email === auth.currentEmail);
     const dayMs = 24 * 60 * 60 * 1000;
 
     function selectedPlan() {
       return document.querySelector("input[name='signupPlan']:checked")?.value || "single_monthly";
-    }
-    function planIsMulti(plan) {
-      return plan === "multi_monthly" || plan === "multi_yearly";
-    }
-    function currentPlan(user = currentUser()) {
-      return user?.subscription?.plan || user?.plan || "single_monthly";
-    }
-    function setAuthMode(mode) {
-      authMode = mode;
-      const isSignup = mode === "signup";
-      document.querySelectorAll(".signup-only").forEach(el => el.classList.toggle("hidden", !isSignup));
-      $("signUpBtn").classList.toggle("hidden", !isSignup);
-      $("signInBtn").classList.toggle("hidden", isSignup);
-      $("showSignInBtn").classList.toggle("active", !isSignup);
-      $("showSignUpBtn").classList.toggle("active", isSignup);
-      $("authIntro").textContent = isSignup
-        ? "Create your owner account once, then SME Payroll will remember this business setup on this browser."
-        : "Welcome back. Sign in to continue with your saved business payroll file.";
-      if (!isSignup && auth.users.length && !$("authEmail").value) $("authEmail").value = auth.users[auth.users.length - 1].email || "";
-    }
-    function showSignIn() {
-      setAuthMode("signin");
-      $("authPassword").focus();
-    }
-    function showSignUp() {
-      setAuthMode("signup");
-      $("authName").focus();
-    }
-    async function cloudApi(path, options = {}) {
-      const headers = { "content-type": "application/json", ...(options.headers || {}) };
-      if (cloudToken) headers.authorization = `Bearer ${cloudToken}`;
-      const errors = [];
-      for (const origin of apiOrigins) {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 12000);
-        try {
-          const response = await fetch(`${origin}${path}`, { ...options, headers, cache: "no-store", signal: controller.signal });
-          const text = await response.text();
-          let data = {};
-          try {
-            data = text ? JSON.parse(text) : {};
-          } catch (error) {
-            throw new Error("Cloud API returned a website/error page instead of data.");
-          }
-          if (!response.ok) throw new Error(data.error || `Cloud request failed (${response.status})`);
-          return data;
-        } catch (error) {
-          const message = error.name === "AbortError" ? "Timed out" : error.message;
-          errors.push(`${origin}: ${message}`);
-        } finally {
-          clearTimeout(timeout);
-        }
-      }
-      const detail = errors.join(" | ");
-      console.warn("SME Payroll cloud API failed", detail);
-      throw new Error("Cloud connection is temporarily unavailable. Your payroll file is still kept on this device. Test the API health link and redeploy the API Worker if it stays offline.");
-    }
-    function setCloudToken(token) {
-      cloudToken = token || "";
-      if (cloudToken) localStorage.setItem(cloudTokenKey, cloudToken);
-      else localStorage.removeItem(cloudTokenKey);
-    }
-    function currentCloudBusinessId() {
-      const user = currentUser();
-      const business = activeBusiness();
-      return business?.cloudBusinessId || user?.cloudBusinessId || "";
-    }
-    function assignCloudBusinessId(businessId) {
-      if (!businessId) return;
-      const user = currentUser();
-      const business = activeBusiness();
-      if (user) user.cloudBusinessId = businessId;
-      if (business) business.cloudBusinessId = businessId;
-      saveAuth();
-      saveAppState();
-    }
-    async function ensureCloudBusinessId() {
-      if (currentCloudBusinessId()) return currentCloudBusinessId();
-      if (!cloudToken) return "";
-      const me = await cloudApi("/api/me");
-      const businessId = me.businesses?.[0]?.id || "";
-      assignCloudBusinessId(businessId);
-      return businessId;
-    }
-    function cloudSnapshot() {
-      const account = currentAccount();
-      return {
-        version: 1,
-        email: auth.currentEmail,
-        account,
-        currentBusinessId: account?.currentBusinessId || "",
-        currentPayrollId: account?.currentPayrollId || "",
-        updatedAt: new Date().toISOString()
-      };
-    }
-    function payrollFileHasData(account) {
-      const businesses = account?.businesses || [];
-      return businesses.some(business => {
-        const profile = business.profile || {};
-        const hasBusinessName = !!(profile.companyName || business.name) && !["New Business", "Company"].includes(profile.companyName || business.name);
-        const payrolls = business.payrolls || [];
-        return hasBusinessName || payrolls.some(payroll => {
-          return !!payroll.period || (payroll.dates || []).length > 0 || (payroll.staff || []).length > 0 || payroll.status === "approved";
-        });
-      });
-    }
-    function setCloudSyncMessage(message, warning = false) {
-      cloudSyncMessage = message;
-      cloudSyncWarning = warning;
-      updateCloudSyncPanel();
-    }
-    function rememberCloudSyncSuccess(message) {
-      lastCloudSyncSuccess = message;
-      localStorage.setItem("sme-payroll-last-cloud-sync-v1", message);
-      setCloudSyncMessage(message);
-    }
-    function showCloudSyncPause(error, manual = false) {
-      const safePrefix = lastCloudSyncSuccess
-        ? `${lastCloudSyncSuccess} The cloud connection is temporarily paused, but this payroll file remains safe on this device.`
-        : "Cloud connection is temporarily unavailable. This payroll file remains safe on this device.";
-      const action = manual
-        ? " Test the API health link, then try Upload this device again."
-        : " Auto-save will retry after your next change.";
-      console.warn("Cloud sync paused", error);
-      setCloudSyncMessage(`${safePrefix}${action}`, true);
-    }
-    function updateCloudSyncPanel() {
-      const panel = $("cloudSyncPanel");
-      if (!panel) return;
-      const signedIn = !!auth.currentEmail;
-      panel.classList.toggle("hidden", !signedIn);
-      panel.classList.toggle("warn", !!cloudSyncWarning);
-      $("cloudSyncTitle").textContent = cloudToken ? "Cloud sync active" : "Cloud sync not connected";
-      $("cloudSyncText").textContent = cloudSyncMessage || (cloudToken
-        ? "This payroll file will save to the cloud after changes. Use Upload this device if this laptop has the correct payroll file."
-        : "Sign in with the cloud account to sync this payroll file across devices.");
-    }
-    async function loadCloudSnapshot() {
-      if (!cloudToken || !auth.currentEmail) return false;
-      const businessId = await ensureCloudBusinessId();
-      if (!businessId) return false;
-      const result = await cloudApi(`/api/businesses/${businessId}/snapshot`);
-      if (!result.snapshot?.account) return false;
-      const localHasData = payrollFileHasData(currentAccount());
-      const cloudHasData = payrollFileHasData(result.snapshot.account);
-      if (localHasData && !cloudHasData) {
-        setCloudSyncMessage("The cloud file is empty, so this device's populated payroll file was kept. Click Upload this device to make it the cloud copy.", true);
-        return false;
-      }
-      appState.accounts[auth.currentEmail] = result.snapshot.account;
-      appState.accounts[auth.currentEmail].invitations ||= [];
-      const business = appState.accounts[auth.currentEmail].businesses?.[0];
-      if (business) business.cloudBusinessId ||= businessId;
-      saveAppState();
-      data = loadActivePayroll();
-      selectedId = data.staff[0]?.id || "";
-      rememberCloudSyncSuccess(`Loaded cloud payroll file${result.updatedAt ? " updated " + result.updatedAt : ""}.`);
-      return true;
-    }
-    async function saveCloudSnapshotNow(manual = false) {
-      if (cloudSyncBusy || !cloudToken || !auth.currentEmail) return;
-      const businessId = await ensureCloudBusinessId();
-      if (!businessId) return;
-      if (!payrollFileHasData(currentAccount())) {
-        setCloudSyncMessage("This device has no payroll data yet, so it was not uploaded over the cloud file.", true);
-        return;
-      }
-      cloudSyncBusy = true;
-      try {
-        await cloudApi(`/api/businesses/${businessId}/snapshot`, {
-          method: "PUT",
-          body: JSON.stringify({ snapshot: cloudSnapshot() })
-        });
-        rememberCloudSyncSuccess(`Uploaded this device's payroll file to the cloud at ${new Date().toLocaleTimeString()}.`);
-      } catch (error) {
-        showCloudSyncPause(error, manual);
-      } finally {
-        cloudSyncBusy = false;
-      }
-    }
-    function queueCloudSnapshot() {
-      if (!cloudToken || !auth.currentEmail) return;
-      clearTimeout(cloudSaveTimer);
-      cloudSaveTimer = setTimeout(() => saveCloudSnapshotNow(false), 3000);
     }
     function trialEndsAt(user) {
       const started = new Date(user?.trialStart || Date.now()).getTime();
@@ -1616,7 +1281,7 @@
       $("multiMonthlyPayLink").href = `${paymentLinks.multi_monthly}&custom=${businessName}`;
       $("multiYearlyPayLink").href = `${paymentLinks.multi_yearly}&custom=${businessName}`;
       $("paymentStatusText").textContent = user
-        ? subscriptionReminderMessage(user) || `Selected plan: ${planLabel(currentPlan(user))}. Pay with PayPal or Visa Debit/Card to continue. Your existing payroll files will remain under this business account.`
+        ? subscriptionReminderMessage(user) || `Your 30-day free trial for ${user.business?.name || "your business"} has ended. Pay with PayPal or Visa Debit/Card to continue.`
         : "Choose a plan to continue using SME Payroll.";
       $("authView").classList.add("hidden");
       $("paymentView").classList.remove("hidden");
@@ -1669,8 +1334,7 @@
     }
     function currentAccount() {
       if (!auth.currentEmail) return null;
-      appState.accounts[auth.currentEmail] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
-      appState.accounts[auth.currentEmail].invitations ||= [];
+      appState.accounts[auth.currentEmail] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
       return appState.accounts[auth.currentEmail];
     }
     function idFrom(prefix) {
@@ -1759,7 +1423,6 @@
       syncDataToActive();
       saveAppState();
       localStorage.setItem(storeKey, JSON.stringify(data));
-      queueCloudSnapshot();
       render();
     }
     function uid(name) {
@@ -1864,7 +1527,6 @@
       $("paymentView").classList.add("hidden");
       document.querySelector(".app").classList.remove("hidden");
       updateSubscriptionBanner();
-      updateCloudSyncPanel();
       $("periodInput").value = data.period;
       $("workspaceSubtitle").textContent = `${companyName()} payroll workspace`;
       if (!$("newStartDate").value) $("newStartDate").value = data.dates[0] || inputDate();
@@ -1918,20 +1580,6 @@
     }
     function renderSettings() {
       const p = profile();
-      const user = currentUser();
-      const account = currentAccount();
-      const plan = currentPlan(user);
-      const multi = planIsMulti(plan);
-      $("accountPlanBadge").textContent = multi ? "Multi-user access" : "Single-user access";
-      $("accountPlanBadge").classList.toggle("pending", !multi);
-      $("accountPlanText").textContent = multi
-        ? `${planLabel(plan)} is selected. You can invite workers or approvers to the same business payroll file.`
-        : `${planLabel(plan)} is selected. Upgrade to multi-user when other workers or approvers need shared access. Existing payroll records will remain unchanged.`;
-      $("multiUserInviteBox").classList.toggle("hidden", !multi);
-      $("settingsUpgradeMultiBtn").classList.toggle("hidden", multi);
-      $("inviteList").innerHTML = (account?.invitations || []).length
-        ? `<strong>Saved invitations:</strong> ${account.invitations.map(inv => `${inv.email} (${inv.role})`).join(", ")}`
-        : "No invitations saved yet.";
       $("userNameInput").value = p.userName || "";
       $("companyNameInput").value = p.companyName || "";
       $("companyAddressInput").value = p.address || "";
@@ -2051,7 +1699,6 @@
       syncDataToActive();
       saveAppState();
       localStorage.setItem(storeKey, JSON.stringify(data));
-      queueCloudSnapshot();
       if (renderNow) render();
       else updateEditorTotals(s);
     }
@@ -2321,53 +1968,10 @@
       saveAppState();
       render();
     }
-    function chooseUpgradePlan(plan = "multi_monthly") {
-      const user = currentUser();
-      if (!user) return;
-      user.plan = plan;
-      user.subscription = {
-        ...(user.subscription || {}),
-        status: user.subscription?.status === "paid" && planIsMulti(user.subscription?.plan) ? "paid" : "pending_upgrade",
-        plan,
-        amountUsd: planAmount(plan)
-      };
-      saveAuth();
-      queueCloudSnapshot();
-      showPayment(user);
-    }
-    function saveInvitation() {
-      const account = currentAccount();
-      const business = activeBusiness();
-      const user = currentUser();
-      if (!planIsMulti(currentPlan(user))) {
-        alert("Upgrade this account to multi-user before inviting other users.");
-        return;
-      }
-      const email = $("inviteEmailInput").value.trim().toLowerCase();
-      const role = $("inviteRoleSelect").value;
-      if (!email) return alert("Enter the user's email address.");
-      account.invitations ||= [];
-      if (!account.invitations.some(inv => inv.email === email)) {
-        account.invitations.push({
-          email,
-          role,
-          businessId: business?.id || "",
-          businessName: business?.name || companyName(),
-          invitedAt: new Date().toISOString()
-        });
-      }
-      $("inviteEmailInput").value = "";
-      saveAppState();
-      queueCloudSnapshot();
-      renderSettings();
-      alert(`Invitation saved for ${email}. The shared payroll file will stay available through cloud sync after the invited user signs in through the cloud account flow.`);
-    }
 
     document.querySelectorAll("[data-tab]").forEach(btn => btn.onclick = () => setTab(btn.dataset.tab));
     document.querySelectorAll("[data-home-tab]").forEach(btn => btn.onclick = () => setTab(btn.dataset.homeTab));
-    $("showSignInBtn").onclick = showSignIn;
-    $("showSignUpBtn").onclick = showSignUp;
-    $("signUpBtn").onclick = async () => {
+    $("signUpBtn").onclick = () => {
       const name = $("authName").value.trim();
       const email = $("authEmail").value.trim().toLowerCase();
       const password = $("authPassword").value;
@@ -2379,23 +1983,10 @@
       if (!businessName) return alert("Enter your business name.");
       if (auth.users.some(u => u.email === email)) return alert("This email is already registered. Sign in instead.");
       const plan = selectedPlan();
-      let cloudBusinessId = "";
-      try {
-        const cloud = await cloudApi("/api/auth/signup", {
-          method: "POST",
-          body: JSON.stringify({ name, email, password, businessName, businessPhone, businessEmail, businessAddress, plan })
-        });
-        setCloudToken(cloud.token);
-        cloudBusinessId = cloud.businessId || "";
-      } catch (error) {
-        alert(`Cloud account was not created: ${error.message}. Please make sure the SME Payroll API Worker is deployed, then try again.`);
-        return;
-      }
       auth.users.push({
         name,
         email,
         password,
-        cloudBusinessId,
         trialStart: new Date().toISOString(),
         plan,
         business: {
@@ -2414,11 +2005,10 @@
       });
       auth.currentEmail = email;
       saveAuth();
-      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
+      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
       const account = appState.accounts[email];
       if (!account.businesses.length) {
         const business = makeBusiness(businessName);
-        business.cloudBusinessId = cloudBusinessId;
         business.profile = {
           ...business.profile,
           companyName: businessName,
@@ -2433,92 +2023,23 @@
       data = loadActivePayroll();
       selectedId = "";
       saveAppState();
-      await saveCloudSnapshotNow();
       render();
     };
-    $("signInBtn").onclick = async () => {
+    $("signInBtn").onclick = () => {
       const email = $("authEmail").value.trim().toLowerCase();
       const password = $("authPassword").value;
-      let user = auth.users.find(u => u.email === email && u.password === password);
-      try {
-        const cloud = await cloudApi("/api/auth/signin", {
-          method: "POST",
-          body: JSON.stringify({ email, password })
-        });
-        setCloudToken(cloud.token);
-        if (!user) {
-          user = {
-            name: cloud.user?.name || email,
-            email,
-            password,
-            trialStart: new Date().toISOString(),
-            plan: "single_monthly",
-            business: {},
-            subscription: { status: "trial", plan: "single_monthly", amountUsd: 10, activatedAt: "", expiresAt: "" }
-          };
-          auth.users.push(user);
-        }
-      } catch (error) {
-        if (!user) return alert(`Sign-in failed: ${error.message}. If this is your first time using another device, the account must exist in the Cloudflare database first.`);
-        try {
-          const localAccount = appState.accounts[email];
-          const localBusiness = localAccount?.businesses?.[0];
-          const cloud = await cloudApi("/api/auth/signup", {
-            method: "POST",
-            body: JSON.stringify({
-              name: user.name || email,
-              email,
-              password,
-              businessName: localBusiness?.profile?.companyName || user.business?.name || "My Business",
-              businessPhone: localBusiness?.profile?.phone || user.business?.phone || "",
-              businessEmail: localBusiness?.profile?.email || user.business?.email || "",
-              businessAddress: localBusiness?.profile?.address || user.business?.address || "",
-              plan: currentPlan(user)
-            })
-          });
-          setCloudToken(cloud.token);
-          user.cloudBusinessId = cloud.businessId || "";
-          if (localBusiness) localBusiness.cloudBusinessId = cloud.businessId || "";
-        } catch (migrationError) {
-          console.warn("Cloud account migration failed", migrationError);
-        }
-      }
+      const user = auth.users.find(u => u.email === email && u.password === password);
+      if (!user) return alert("Sign-in failed. Check your email and password.");
       auth.currentEmail = email;
       saveAuth();
-      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "", invitations: [] };
+      appState.accounts[email] ||= { businesses: [], currentBusinessId: "", currentPayrollId: "" };
       activeBusiness();
-      let loadedCloudFile = false;
-      try {
-        loadedCloudFile = await loadCloudSnapshot();
-      } catch (error) {
-        console.warn("Cloud load failed", error);
-      }
       data = loadActivePayroll();
       selectedId = data.staff[0]?.id || "";
       saveAppState();
-      if (!loadedCloudFile) await saveCloudSnapshotNow(false);
       render();
     };
     $("manageSubscriptionBtn").onclick = () => showPayment();
-    $("uploadCloudBtn").onclick = async () => {
-      await saveCloudSnapshotNow(true);
-      render();
-    };
-    $("downloadCloudBtn").onclick = async () => {
-      try {
-        const loaded = await loadCloudSnapshot();
-        if (!loaded) setCloudSyncMessage("No populated cloud payroll file was found. Use Upload this device from the laptop that has the correct payroll data.", true);
-      } catch (error) {
-        setCloudSyncMessage(`Cloud load failed: ${error.message}`, true);
-      }
-      data = loadActivePayroll();
-      selectedId = data.staff[0]?.id || "";
-      render();
-    };
-    $("upgradeMultiBtn").onclick = () => chooseUpgradePlan("multi_monthly");
-    $("settingsUpgradeMultiBtn").onclick = () => chooseUpgradePlan("multi_monthly");
-    $("settingsManageSubscriptionBtn").onclick = () => showPayment();
-    $("saveInviteBtn").onclick = saveInvitation;
     async function enableSubscriptionNotifications() {
       if (!("Notification" in window)) {
         alert("This browser does not support notification reminders. SME Payroll will still show reminders inside the app.");
@@ -2537,7 +2058,6 @@
     $("paymentEnableNotificationsBtn").onclick = enableSubscriptionNotifications;
     $("paymentSignOutBtn").onclick = () => {
       auth.currentEmail = "";
-      setCloudToken("");
       saveAuth();
       render();
     };
@@ -2557,7 +2077,6 @@
         expiresAt: expires.toISOString()
       };
       saveAuth();
-      queueCloudSnapshot();
       alert("Access activated on this device. Keep the PayPal receipt for SAUFO Trading payment confirmation.");
       render();
     };
@@ -2565,7 +2084,6 @@
     $("backHomeBtn").onclick = showHome;
     $("signOutBtn").onclick = () => {
       auth.currentEmail = "";
-      setCloudToken("");
       saveAuth();
       data = structuredClone(seed);
       selectedId = "";
@@ -2663,7 +2181,7 @@
       if (!file) return;
       const reader = new FileReader();
       reader.onload = () => {
-      data.profile = { ...profile(), logo: reader.result, appIcon: "/assets/saufo-logo.png" };
+      data.profile = { ...profile(), logo: reader.result, appIcon: "assets/saufo-logo.png" };
         save();
       };
       reader.readAsDataURL(file);
@@ -2715,7 +2233,6 @@
       save();
     };
 
-    setAuthMode(authMode);
     render();
   </script>
 </body>

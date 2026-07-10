@@ -1,0 +1,14 @@
+/sme-payroll-cloud
+  Cache-Control: no-store, max-age=0
+
+/sme-payroll-cloud.html
+  Cache-Control: no-store, max-age=0
+
+/sme-payroll-cloud/*
+  Cache-Control: no-store, max-age=0
+
+/apps/sme-payroll-cloud/*
+  Cache-Control: no-store, max-age=0
+
+/*.html
+  Cache-Control: no-store, max-age=0
