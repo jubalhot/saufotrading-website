@@ -12,10 +12,3 @@ Thumbs.db
 
 # Deployment archives should not be committed
 *.zip
-
-# wrangler files
-.wrangler
-.dev.vars*
-!.dev.vars.example
-.env*
-!.env.example
